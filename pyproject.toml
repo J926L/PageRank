@@ -1,0 +1,19 @@
+[project]
+name = "pagerank"
+version = "0.1.0"
+description = "PageRank analysis of Hillary's emails"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "networkx>=3.6.1",
+    "numpy>=2.4.0",
+    "pandas>=2.3.3",
+    "scipy>=1.16.3",
+]
+
+[project.scripts]
+pagerank = "main:main"
+
+[tool.uv]
+package = true

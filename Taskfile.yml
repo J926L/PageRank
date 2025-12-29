@@ -1,0 +1,38 @@
+version: "3"
+
+tasks:
+  setup:
+    desc: Install dependencies using uv
+    cmds:
+      - uv sync
+
+  run:
+    desc: Run PageRank analysis
+    cmds:
+      - uv run pagerank
+
+  check:
+    desc: Check environment
+    cmds:
+      - uv run python --version
+      - uv run pip list
+
+  clean:
+    desc: Clean up build artifacts and caches
+    cmds:
+      - rm -rf src/*.egg-info
+      - find . -name "__pycache__" -type d -exec rm -rf {} +
+      - rm -rf .pytest_cache
+      - rm -rf output/*.png
+
+  docker:build:
+    desc: Build Docker image
+    cmds:
+      - docker build -t pagerank .
+
+  docker:run:
+    desc: Run PageRank analysis in Docker and sync output
+    deps: [docker:build]
+    cmds:
+      - mkdir -p output
+      - docker run --rm -v "$(pwd)/output:/app/output" pagerank
