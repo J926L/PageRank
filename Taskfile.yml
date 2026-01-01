@@ -18,12 +18,13 @@ tasks:
       - uv run pip list
 
   clean:
-    desc: Clean up build artifacts and caches
+    desc: Clean up build artifacts, caches, venv and output
     cmds:
       - rm -rf src/*.egg-info
       - find . -name "__pycache__" -type d -exec rm -rf {} +
       - rm -rf .pytest_cache
-      - rm -rf output/*.png
+      - rm -rf .venv
+      - rm -rf output/*
 
   docker:build:
     desc: Build Docker image
